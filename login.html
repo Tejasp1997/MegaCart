@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaCart</title>
+    <link rel="stylesheet" href="login.css">
+    
+</head>
+<body>
+    <h1>The Mega Cart</h1>
+    <form id="login-form">
+        <label for="username">Username:</label>
+    <input type="text" id="username"><br><br>
+    <label for="password">Password:</label>
+    <input type="password"id="password"><br>
+    <input type="submit" value="Login" >
+</form><br>
+
+<span>New user sign up here <a href="/signup.html">sign up</a></span>
+
+<script>
+    const form = document.getElementById("login-form");
+
+    form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+     const username = document.getElementById("username").value.trim();
+     const password = document.getElementById("password").value;
+ 
+     if(username === '' || password === '') {
+         alert("Please enter both username and password");
+     } else {
+         if(username === localStorage.getItem("username") && password === localStorage.getItem("password")){
+         localStorage.setItem("username", username);
+         
+
+         window.location.href = "main.html";
+        
+ 
+                 } else {
+                     alert("Invalid username or password");
+                 
+     }
+ }
+ });
+    
+ </script>
+
+</body>
+</html>

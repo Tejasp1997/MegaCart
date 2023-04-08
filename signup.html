@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SignUp Form</title>
+<link rel="stylesheet" href="signup.css">
+
+</head>
+
+<body>
+    <h1>SignUp Form</h1>
+    <form id="signup-form"  >
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="mobile">Mobile:</label>
+        <input type="text" id="mobile" name="mobile"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <label for="repassword">Confirm Password:</label>
+        <input type="password" id="repassword" name="repassword"><br><br>
+        <input type="submit" value="SignUp">
+    </form>
+
+    <script>
+        const form = document.getElementById("signup-form");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const mobile = document.getElementById("mobile").value.trim();
+            const password = document.getElementById("password").value;
+            const repassword = document.getElementById("repassword").value;
+
+            let isValid = true;
+
+            if (username.length < 6 || username.length > 10) {
+                alert("Username must be between 6 and 10 characters");
+                isValid = false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email format");
+                isValid = false;
+            }
+
+            const mobileRegex = /^\d{10}$/;
+            if (!mobileRegex.test(mobile)) {
+                alert("Mobile number must be exactly 10 digits");
+                isValid = false;
+            }
+
+            const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{6,}$/;
+            if (!passwordRegex.test(password)) {
+                alert("Password must contain at least one digit, one character, and one special character");
+                isValid = false;
+            }
+
+            if (password !== repassword) {
+                alert("Passwords do not match");
+                isValid = false;
+            }
+
+            if (isValid) {
+                localStorage.setItem("username", username);
+                localStorage.setItem("email", email);
+                localStorage.setItem("password", password);
+                localStorage.setItem("mobile", mobile);
+
+                alert("Registration successful!");
+                //form.reset();
+                
+                window.location.href = "main.html"
+
+            }
+        });
+        
+    </script>
+</body>
+
+</html>

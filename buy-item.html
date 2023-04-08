@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+    <h1 id="username"></h1>
+    <p id="date"></p>
+
+    <button id="logout-link" style="position: fixed;top: 0; right: 0;">Logout</button>
+
+
+    <script>
+         window.onload = function () {
+            // get the username from the local storage
+            var username = localStorage.getItem("username");
+
+            // display the username on the page
+            document.getElementById("username").innerHTML = "Dear, " + username + " " + "Welcome to Mega Cart";
+            const d = new Date();
+            d.setFullYear(2020);
+            document.getElementById("date").innerHTML = d;
+            const logoutLink = document.getElementById("logout-link");
+        logoutLink.addEventListener("click", function () {
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = "login.html";
+        });
+        // get the array of items from localStorage
+const items = JSON.parse(localStorage.getItem('items')) || [];
+
+// get the element where the list will be displayed
+const itemList = document.createElement('ul');
+
+// iterate over the array of items and create a list item for each item
+let totalCost = 0;
+items.forEach(item => {
+  // create a list item
+  const listItem = document.createElement('li');
+
+  // add the item name, image, cost, and delivery days to the list item
+  listItem.innerHTML = `
+    <img src="${item.image}" alt="${item.name}">
+    <div>
+      <p>${item.name}</p>
+      <p>Cost: $${item.cost.toFixed(2)}</p>
+      <p>Delivery: ${item.delivery} days</p>
+    </div>
+  `;
+
+  // add the list item to the item list
+  itemList.appendChild(listItem);
+
+  // update the total cost
+  totalCost += item.cost;
+});
+
+// display the total cost as a rounded up value
+const totalCostRounded = Math.ceil(totalCost * 100) / 100;
+itemList.innerHTML += `<li>Total Cost: $${totalCostRounded.toFixed(2)}</li>`;
+
+// add the item list to the page
+const cartContainer = document.createElement('div');
+cartContainer.appendChild(itemList);
+document.body.appendChild(cartContainer);
+         }
+
+    </script>
+</body>
+</html>

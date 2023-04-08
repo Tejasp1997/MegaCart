@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        window.onload = function () {
+            // get the username from the local storage
+            var username = localStorage.getItem("username");
+
+            // display the username on the page
+            document.getElementById("username").innerHTML = "Dear, " + username + " " + "Welcome to Mega Cart";
+            const d = new Date();
+            d.setFullYear(2020);
+            document.getElementById("date").innerHTML = d;
+            const logoutLink = document.getElementById("logout-link");
+        logoutLink.addEventListener("click", function () {
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = "login.html";
+        });
+        const viewCart = document.getElementById("cart");
+        viewCart.addEventListener("click", function () {
+            window.location.href = "buy-item.html";
+        });
+        const itemContainer = document.querySelector('.item-container');
+        
+       
+
+// Add a click event listener to the item container
+itemContainer.addEventListener('click', (event) => {
+  // Get the clicked item element and its data attributes
+  const selectedItem = event.target.closest('.item');
+  const itemName = selectedItem.dataset.name;
+  const itemCost = parseFloat(selectedItem.dataset.cost);
+  const itemDelivery = parseInt(selectedItem.dataset.delivery);
+
+  // Create an object with the item data
+  const itemObject = {
+    name: itemName,
+    cost: itemCost,
+    delivery: itemDelivery,
+    image: selectedItem.querySelector('img').src
+  };
+
+  // Get the existing items from localStorage or create an empty array
+  const existingItems = JSON.parse(localStorage.getItem('items')) || [];
+
+  // Add the new item object to the array
+  existingItems.push(itemObject);
+
+  // Store the updated items array in localStorage
+  localStorage.setItem('items', JSON.stringify(existingItems));
+
+  // Show an alert with the selected item information
+  const alertMessage = `You selected ${itemName}. Cost: $${itemCost.toFixed(2)}. Delivery: ${itemDelivery} days.`;
+  alert(alertMessage);
+});
+        }
+    </script>
+</head>
+
+<body>
+    <h1 id="username"></h1>
+    <p id="date"></p>
+
+    <button id="logout-link" style="position: fixed;top: 0; right: 0;">Logout</button>
+    <button id="cart"style=" display: flex;justify-content: center;align-items: center;">click here to view cart</button>
+
+
+    <div class="item-container">
+    <div class="item" data-name="Clothes" data-cost="10.99" data-delivery="3">
+      <img src="/clothing.jpg" alt="Clothes">
+    </div>
+    <div class="item" data-name="footwear" data-cost="5.99" data-delivery="5">
+      <img src="/footwear.jpg" alt="footwear">
+    </div>
+    <div class="item" data-name="health" data-cost="20.99" data-delivery="1">
+      <img src="/health.jpg" alt="health">
+    </div>
+    <div class="item" data-name="school" data-cost="20.99" data-delivery="1">
+        <img src="/school.jpg" alt="school">
+      </div>
+  </div>
+   
+
+</body>
+
+</html>

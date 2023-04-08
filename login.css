@@ -1,0 +1,65 @@
+/* Style for the login form */
+body{
+    background-color: aqua;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#login-form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  #login-form label {
+    display: inline-block;
+    width: 80px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  #login-form input[type="text"], #login-form input[type="password"] {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #login-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #login-form input[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Style for the signup link */
+  span a {
+    color: #4CAF50;
+    text-decoration: none;
+   
+  }
+  span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  span a:hover {
+    text-decoration: underline;
+  }
+  
